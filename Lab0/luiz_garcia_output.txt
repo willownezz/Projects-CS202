@@ -1,0 +1,7 @@
+
+The value of 9! is: 362880
+
+This program was written by luiz_garcia.
+
+Goodbye.
+

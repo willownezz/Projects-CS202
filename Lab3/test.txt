@@ -1,0 +1,20 @@
+The size of type 'GradeInfo' is: 8
+The size of type 'StudentGrade' is: 104
+The size of pointers 's' is: 8
+
+Enter first name: Enter last name: Enter test score: Enter test score: Enter test score: Enter test score: Enter test score: 
+First name: Null
+Last  name: Null2
+
+ Test score: 99     A
+ Test score: 11     F
+ Test score: 99     A
+ Test score: 11     F
+ Test score: 99     A
+
+
+
+  Max score: 99
+    Average: 63.8
+      Grade: D
+
