@@ -1,11 +1,12 @@
 // poly_struct_v1.cpp
-// Test program for polinomials implemented as structures
+// Test program for polynomials implemented as structures
+
 
 // Version 1 ... Basic version accessing polynomial array with pointers
 
 #include <iostream>
 
-#define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
 
 using namespace std;
 
@@ -15,6 +16,7 @@ struct Polynomial
     int coef[9];        // Array of coefficients
 };
 
+
 // Function prototypes go here
 
 void get_poly(Polynomial *);
@@ -22,10 +24,10 @@ void display_poly(Polynomial *);
 void Add_2_Polynomials(Polynomial *);
 
 // "main()" function --- the program's entry point
-// int argc         // Number of parameters on the command line
-// char *argv[]     // An array of pointers to C-strings
+//      int argc        // Number of parameters on the comand line
+//      char *argv[]    // An array of pointers to C-strings
 
-int main(int argc, char * argv[])
+int main (int argc, char * argv[])
 {
     Polynomial poly[3];
 
@@ -35,12 +37,15 @@ int main(int argc, char * argv[])
         display_poly(poly+n);
     }
 
+
     Add_2_Polynomials(poly);
 
     display_poly(poly+2);
 
     return 0;
 }
+
+
 void get_poly(Polynomial *p)
 {
     cout << "\nEnter degree of polynomial: ";
@@ -48,39 +53,41 @@ void get_poly(Polynomial *p)
 
     cout << "\nEnter the " << p->degree+1 << " coefficients: ";
 
+
     for (int i = p->degree; i >= 0; i--)
-    cin >> p->coef[i];
+        cin >> p->coef[i];
 }
 
-void display_poly(Polynomial *p)
+void display_poly (Polynomial *p)
 {
-    cout << "\n\t";         //Display polynomial
+    cout << "\n\t";         // Display polynomial
 
     for (int i = p->degree; i >= 0; i--)
-    {
-        if (i< p->degree)
         {
-            if (p->coef[i] >= 0) cout << " +";
-            else cout << " ";
-        }
-        cout << p->coef[i];
+            if (i < p->degree)
+            {
+                if (p->coef[i] >= 0) cout << " +";
+                else cout << " ";
+            }
+            cout << p->coef[i];
 
-        if (i>1) cout << "x^" << i;
-        if (i==1) cout << "x";
-    }
-    cout << endl;
-    cout << endl;
+            if (i>1) cout << "x^" << i;
+            if (i==1) cout << "x";
+        }
+
+        cout << endl;
+        cout << endl;
 }
+
 
 // Using the arrow operator and pass by reference
 
 void Add_2_Polynomials(Polynomial *p)
 {
-    cout << "\nAdding the 2 polynomial: \n\n";
-    
+    cout << "\nAdding the 2 polynomials: \n\n";
+
     (p+2)->degree = MAX(p->degree, (p+1)->degree);
 
-    for(int i = (p+2)->degree; i >+ 0; i--)
+    for (int i = (p+2)->degree; i >= 0; i--)
         (p+2)->coef[i] = p->coef[i] + (p+1)->coef[i];
 }
-    
