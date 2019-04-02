@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------------------------------
+# FILE NAME:         Makefile2
+# DESCRIPTION:
+# USAGE:             make
+# COMPILER:          GNU g++ compiler on Linux
+#
+# MODIFICATION HISTORY:
+# Author               Date            Version             Description
+# ---------------      ----------      ------------        ------------
+# Luiz Diego Garcia    03/31/19        0.0.1               Created File
+# Luiz Diego Garcia    04/02/19        0.0.2               Changed file for Lab6
+# Luiz Diego Garcia    04/02/19        0.0.3               Changed file for Lab6
+# ---------------------------------------------------------------------------------------
+
+#           This is out original generic makefile command that will build
+#           any stand alone ".cpp" source file.
+#           Usage: e.g., make hello
+
+.cpp :
+	g++ -o $* $*.cpp -std=c++11
+
+#           This will build the two object files requered for "poly_class_v2"
+#           and link them into a single executable.
+#           Usage: make -f Makefile2 poly_class_v2
+
+poly_class_v2: Polynomial.o poly_class_v2.o
+	g++ -o $@ $@.o Polynomial.o  -std=c++11
+
+poly_class_v2.o  :  Polynomial.h
+Polynomial.o     :  Polynomial.h
+
+#           This will build the two object files required for "poly_class_v3"
+#           and link them into a single exe.
+#           Usage:  make -f Makefile3 poly_class_v3
+
+
+poly_class_v3: Polynomial.o poly_class_v3.o
+	g++ -o $@ $@.o Polynomial.o  -std=c++11
+
+poly_class_v2.o  :  Polynomial.h
+poly_class_v3.o  :  Polynomial.h
+Polynomial.o     :  Polynomial.h
+
+
