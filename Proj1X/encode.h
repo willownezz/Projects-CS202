@@ -7,6 +7,7 @@ MODIFICATION HISTORY:
 Author                 Date            Version    Details
 -----------------      ----------      -------    ----------------------------------------
 Luiz Diego Garcia      2019-04-06       1.0.0     Created file
+Luiz Diego Garcia      2019-04-07       1.0.1     Added end of program prototype
 ----------------------------------------------------------------------------------------*/
 
 //#pragma once
@@ -18,9 +19,11 @@ Luiz Diego Garcia      2019-04-06       1.0.0     Created file
 // Libraries
 //////////////////////////////////////
 #include <iostream>
-#include <cstring>
 #include <iomanip>
 #include <fstream>
+#include <cstring>
+#include <string>
+#include <sstream>
 
 
 //////////////////////////////////////
