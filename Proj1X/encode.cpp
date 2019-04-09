@@ -32,97 +32,112 @@ RETURNS:            0
 int main(int argc, char *argv[])
 {
 
-    const int SIZE = 10;
-    cout << endl;
-    string fileName = "null";
-    string OutFileName = "output.bin";
-    string data;
-    int numBytes = 0;
+	
+	cout << endl;
+	string fileName = "null";               //file chosen by the user to be opened and compressed
+	string OutFileName = "output.bin";      //Output binary compressed file.
+	int numBytes = 0;                       //Saves the size of file.
+	const int SIZE = 10;
 
-    //Removes unused warning
+	//Removes unused warning
 	char *prog = argv[0];
 	(void)argc;
 
-    //Args from user
-    if (argc == 2)
+
+	//Read file - ./encode n3.dat ------ line arguments
+	if (argc == 2)
 	{
-        fileName = argv[1];
-        cout << "File name: " << fileName << endl;
-    }
+		fileName = argv[1];
+		cout << "File name: " << fileName << endl;
+	}
 
-    fstream file(fileName, ios::in);
-    
-    if(file.fail())
-    {
-        cout << "ERROR: Cannot open the file." << endl << endl;
-    }
+	fstream file(fileName, ios::in);
+	
+	if(file.fail())
+	{
+		cout << "ERROR: Cannot open the file." << endl << endl;
+	}
 
-    fstream OutFile(OutFileName, ios::out | ios::binary);
-    
-    if(OutFile.fail())
-    {
-        cout << "ERROR: Cannot open the file." << endl << endl;
-    }
+	fstream OutFile(OutFileName, ios::out | ios::binary);
+	
+	if(OutFile.fail())
+	{
+		cout << "ERROR: Cannot open the file." << endl << endl;
+	}
 
-    //Calculates size of file
-    file.seekg(0L, ios::end);
-    numBytes = file.tellg();
-    cout << "File size: " << numBytes << " bytes." << endl;
-    cout << endl;
+	//Calculates size of file
+	file.seekg(0L, ios::end);
+	numBytes = file.tellg();
+	cout << "File size: " << numBytes << " bytes." << endl;
+	cout << endl;
 
-    //Shows number of col and square size
-    // n= 3     num= 9
+	//Shows number of col and square size
+	// n= 3     num= 9
  
-    string name1;
-    string name2;
-    string name3;
-    if(file.is_open())
-    {
-        while(file >> name1 >> name2 >> name3)
-        {
-            cout << name1 << " " << name2 << " " << name3 << " " << endl;
-        }
-    }
-
-    //output compressed file
-    cout << "File name: " << OutFileName << endl;
-
-    //Calculates size of file
-    OutFile.seekg(0L, ios::end);
-    numBytes = OutFile.tellg();
-    cout << "File size: " << numBytes << " bytes." << endl;
-    cout << endl;
-
-
-    OutFile.close();
-    file.close();
-    
-
-    //Read file - ./encode n3.dat ------ line arguments
-    
-    //get file size with tellg seekg
-    //function that show number of bytes in input and output files
-
-    //read file into buffer
-    //read "n= 3" separately to get square size
-
-    //close file
-
-    //compress file into .bin ----- output.bin (compress by 3 times)
-
-    //Read the output.bin display as text ------ identical as the original (decode)
-    //create DECODE function ------- ./decode output.bin
-    //symbolic links
-
-    //compress file even more {EXTRA}
-
-    
-    
+	string name1;
+	string name2;
+	string name3;
+	if(file.is_open())
+	{
+		while(file >> name1 >> name2 >> name3)
+		{
+			cout << name1 << " " << name2 << " " << name3 << " " << endl;
+		}
+	}
 
 
 
-    EndOfProgram(cout);
-    return 0;
+
+
+
+
+
+
+	//output compressed file
+	cout << "File name: " << OutFileName << endl;
+
+	//Calculates size of file
+	OutFile.seekg(0L, ios::end);
+	numBytes = OutFile.tellg();
+	cout << "File size: " << numBytes << " bytes." << endl;
+	cout << endl;
+
+	//close file
+	OutFile.close();
+	file.close();
+
+	
+
+	
+	
+	
+
+	//read file into buffer
+	//read "n= 3" separately to get square size
+
+	
+
+	//compress file into .bin ----- output.bin (compress by 3 times)
+
+
+
+
+	//Read the output.bin display as text ------ identical as the original (decode)
+	//create DECODE function ------- ./decode output.bin
+	//symbolic links
+
+
+
+
+	//compress file even more {EXTRA}
+
+	
+	
+
+
+
+	EndOfProgram(cout);
+	return 0;
 }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           EndOfProgram()
@@ -131,10 +146,10 @@ RETURNS:            void
 --------------------------------------------------------------------------------------------------*/
 void EndOfProgram(ostream &out)
 {
-    out << endl << endl;
-    out << "Programmed by: " << PROGRAMMER_NAME << " -- ";
-    out << __DATE__ << "  " __TIME__ << endl;
-    out << endl;
+	out << endl << endl;
+	out << "Programmed by: " << PROGRAMMER_NAME << " -- ";
+	out << __DATE__ << "  " __TIME__ << endl;
+	out << endl;
 
-    return;
+	return;
 }
