@@ -31,7 +31,6 @@ RETURNS:            0
 --------------------------------------------------------------------------------------------------*/
 int main(int argc, char *argv[])
 {
-
 	
 	cout << endl;
 	string fileName = "null";               //file chosen by the user to be opened and compressed
@@ -81,10 +80,8 @@ int main(int argc, char *argv[])
 	{
 		while(file >> name1 >> name2 >> name3)
 		{
-			cout << name1 << " " << name2 << " " << name3 << " " << endl;
+			
 		}
-	}
-
 
 
 
