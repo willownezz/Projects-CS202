@@ -73,17 +73,22 @@ int main(int argc, char *argv[])
 	//Shows number of col and square size
 	// n= 3     num= 9
  
-	string name1;
-	string name2;
-	string name3;
+	char data[20];
 	if(file.is_open())
 	{
-		while(file >> name1 >> name2 >> name3)
+		cout << "Im if file.is_open" << endl;
+		for(int i = 0; i < SIZE; i++)
 		{
-			
+			file >> data[i];
+			//cout << "Im first 4loop" << endl;
 		}
-
-
+		
+		for(int i = 0; i < SIZE; i++)
+		{
+			cout << data[i];
+			//cout << "Im second 4loop" << endl;
+		}
+	}
 
 
 
