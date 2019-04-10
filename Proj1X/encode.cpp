@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 	string fileName = "null";               //file chosen by the user to be opened and compressed
 	string OutFileName = "output.bin";      //Output binary compressed file.
 	int numBytes = 0;                       //Saves the size of file.
-	const int SIZE = 16;
+	const int SIZE = 66;					//n5=45 rn16=66
 	char data[SIZE];
 	
 	//Removes unused warning
@@ -73,17 +73,14 @@ int main(int argc, char *argv[])
 	cout << endl;
 	file.seekg(0L, ios::beg);	//Goes to begging of file
 
-	int j = 0;
+
 	if(file)
-			{
-				while(!file.eof())
-				{	
-					for(int i = 0; i < 29; i++)
-					{
-						file >> data[i];
-					} 
-					j++;
-				}
+			{	
+				
+				for(int i = 0; i < SIZE; i++)
+				{
+					file >> data[i];
+				} 
 			}
 
 			//Copies number to find magic square
