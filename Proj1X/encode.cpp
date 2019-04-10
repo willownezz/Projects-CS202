@@ -36,8 +36,9 @@ int main(int argc, char *argv[])
 	string fileName = "null";               //file chosen by the user to be opened and compressed
 	string OutFileName = "output.bin";      //Output binary compressed file.
 	int numBytes = 0;                       //Saves the size of file.
-	const int SIZE = 10;
-
+	const int SIZE = 16;
+	char data[SIZE];
+	
 	//Removes unused warning
 	char *prog = argv[0];
 	(void)argc;
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
 
 	fstream file(fileName, ios::in);
 	
+	
 	if(file.fail())
 	{
 		cout << "ERROR: Cannot open the file." << endl << endl;
@@ -65,35 +67,40 @@ int main(int argc, char *argv[])
 	}
 
 	//Calculates size of file
-	file.seekg(0L, ios::end);
+	file.seekg(0L, ios::end); // Goes to end of file
 	numBytes = file.tellg();
 	cout << "File size: " << numBytes << " bytes." << endl;
 	cout << endl;
+	file.seekg(0L, ios::beg);	//Goes to begging of file
 
-	//Shows number of col and square size
-	// n= 3     num= 9
- 
-	char data[20];
-	if(file.is_open())
-	{
-		cout << "Im if file.is_open" << endl;
-		for(int i = 0; i < SIZE; i++)
-		{
-			file >> data[i];
-			//cout << "Im first 4loop" << endl;
-		}
-		
-		for(int i = 0; i < SIZE; i++)
-		{
-			cout << data[i];
-			//cout << "Im second 4loop" << endl;
-		}
-	}
+	int j = 0;
+	if(file)
+			{
+				while(!file.eof())
+				{	
+					for(int i = 0; i < 29; i++)
+					{
+						file >> data[i];
+					} 
+					j++;
+				}
+			}
 
+			//Copies number to find magic square
+			char aStr[3] = {data[2], 0};
+			int n = atoi(aStr);
+			int square = n * n;
 
-
-
-
+			//Shows number in file and finds magic square value
+			cout << "n= " << n << "   num= " << square << endl;
+			
+			
+			
+			for(int i = 0; i < SIZE; i++)
+			{
+				cout << data[i];
+			}
+	cout << endl << endl;
 
 	//output compressed file
 	cout << "File name: " << OutFileName << endl;

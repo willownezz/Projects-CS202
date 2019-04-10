@@ -23,7 +23,7 @@ Luiz Diego Garcia      2019-04-07       1.0.1     Added end of program prototype
 #include <fstream>
 #include <cstring>
 #include <string>
-#include <sstream>
+#include <cstdlib>
 
 
 //////////////////////////////////////
