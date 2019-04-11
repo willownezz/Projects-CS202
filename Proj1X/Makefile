@@ -16,6 +16,7 @@
 
 .cpp :
 	g++ -o $* $*.cpp -std=c++11
+	ln -sf encode decode
 
 #           This will build the files that have dependencies on .h files
 #           Usage: make -f Makefile encode
