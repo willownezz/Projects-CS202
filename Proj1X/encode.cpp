@@ -19,6 +19,8 @@ Luiz Diego Garcia           2019-04-07          1.0.1        Created header file
 
 using namespace std;
 
+typedef unsigned char byte;
+
 //////////////////////////////////////
 // Constant Variables
 //////////////////////////////////////
@@ -37,7 +39,7 @@ int main(int argc, char *argv[])
 	string OutFileName = "output.bin";      //Output binary compressed file.
 	int numBytes = 0;                       //Saves the size of file.
 	const int SIZE = 66;					//n5=45 rn16=66
-	char data[SIZE];
+    byte data[SIZE];
 	
 	//Removes unused warning
 	char *prog = argv[0];
@@ -92,7 +94,7 @@ int main(int argc, char *argv[])
 
 	
 		//Reading file
-		char temp;
+		int temp;
 		int counter = 0;
 		int size = 0;
 
