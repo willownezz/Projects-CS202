@@ -30,6 +30,11 @@ Luiz Diego Garcia      2019-04-07       1.0.1     Added end of program prototype
 // Prototypes
 //////////////////////////////////////
 void EndOfProgram(std::ostream &out);
+void OpenFiles(std::ostream &out, string &, string &);
+void CheckFile(string &, std::fstream &file);
+void FileSize();
+void ReadIntoBinary();
+void EncodeDecode(char *);
 
 
 //////////////////////////////////////
