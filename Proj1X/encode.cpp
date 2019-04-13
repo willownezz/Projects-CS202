@@ -175,7 +175,8 @@ void ReadIntoBinary(fstream &file)
 		
 		file >> dataTemp;
 		file >> n;
-		square = pow(n,2);
+		square = n * n;
+
 
 		for(int i = 0; i < square; i++)
 		{
