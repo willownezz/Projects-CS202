@@ -24,17 +24,18 @@ Luiz Diego Garcia      2019-04-07       1.0.1     Added end of program prototype
 #include <cstring>
 #include <string>
 #include <cstdlib>
+#include <cmath>
 
 
 //////////////////////////////////////
 // Prototypes
 //////////////////////////////////////
 void EndOfProgram(std::ostream &out);
-void OpenFiles(std::ostream &out, string &, string &);
-void CheckFile(string &, std::fstream &file);
-void FileSize();
-void ReadIntoBinary();
-void EncodeDecode(char *);
+void OpenFiles(std::string &);
+void CheckFile(std::string &, std::fstream &);
+int FileSize(std::fstream &);
+void ReadIntoBinary(std::fstream &);
+void Decode(char *);
 
 
 //////////////////////////////////////
