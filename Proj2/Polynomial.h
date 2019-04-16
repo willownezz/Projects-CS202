@@ -44,15 +44,20 @@ class Polynomial
 
     public:
         Polynomial();       // Constructor
+        ~Polynomial();      // Destructor
+
+
         void get_poly();
         void display_poly();
         void Add_2_Polynomials(Polynomial, Polynomial);
 		void Sub_2_Polynomials(Polynomial, Polynomial);
 		void Mul_2_Polynomials(Polynomial, Polynomial);
 
-        Polynomial operator + (const Polynomial &);      // Overloaded + operator
-        Polynomial operator - (const Polynomial &);      // Overloaded - operator
-        Polynomial operator * (const Polynomial &);      // Overloaded * operator
+        Polynomial operator + (const Polynomial &);      // Overloaded +  operator
+        Polynomial operator - (const Polynomial &);      // Overloaded -  operator
+        Polynomial operator * (const Polynomial &);      // Overloaded *  operator
+        Polynomial operator = (const Polynomial &);      // Overloaded *  operator
+        ostream& operator  << (const ostream &);         // Overloaded << operator 
 };
 
 

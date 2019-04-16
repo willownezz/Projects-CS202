@@ -35,7 +35,8 @@ int main ()
     for (int n=0; n < 2; n++)
     {
         poly[n].get_poly();
-        cout << "\n Polynomial   # " << n+1 << " is: ";
+        cout << endl;
+        cout << "\n             Polynomial   # " << n+1 << " is: ";
         poly[n].display_poly();
     }
 
@@ -47,6 +48,27 @@ int main ()
 
     poly[2] = poly[0] * poly[1];
     poly[2].display_poly();
+
+    cout << endl;
+    cout << " << Operator overload: ";
+    // poly[0] = poly[1];
+    // cout << poly[0] << endl;
+    // cout << poly[1] << endl;
+
+    cout << endl;
+    cout << " >> Operator overload: ";
+
+    // Copy Constructor
+    cout << endl;
+    cout << " Copy Constructor: ";
+    Polynomial cpTest = poly[1];
+    cpTest.display_poly();
+
+    // Assignement operator overload
+    cout << endl;
+    cout << " Assignement operator overloaded: ";
+    cpTest = poly[0];
+    cpTest.display_poly();
 
     cout << endl;
 	EndOfProgram(cout);
