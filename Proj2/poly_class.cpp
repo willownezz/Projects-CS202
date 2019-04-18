@@ -93,8 +93,6 @@ int main ()
     Polynomial polyOver = Polynomial(poly[0]);
     cout << " " << polyOver <<endl;
 
-    cout << endl;
-    cout << endl;
 	EndOfProgram(cout);
     return 0;
 }
