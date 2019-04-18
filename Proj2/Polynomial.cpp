@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------------------------
 FILE NAME:          Polynomial.cpp
-DESCRIPTION:        
-USAGE:              
+DESCRIPTION:        File with functions
+USAGE:              ./test.poly.sh
 COMPILER:           GNU g++ compiler on Linux
 
 MODIFICATION HISTORY:
@@ -9,6 +9,23 @@ Author                      Date               Version       Details
 -----------------           ----------         --------      ---------------------------------------
 Luiz Diego Garcia           2019-04-10         1.0           Created File
 Luiz Diego Garcia           2019-04-13         1.1           Fixed headers and comments
+Luiz Diego Garcia           2019-04-13         1.2 			 Created + Overload          
+Luiz Diego Garcia           2019-04-13         1.3           Created - Overload
+Luiz Diego Garcia           2019-04-13         1.4           Created * Overload
+Luiz Diego Garcia           2019-04-13         1.5           Created = Overload
+Luiz Diego Garcia           2019-04-13         1.6           Created == Overload
+Luiz Diego Garcia           2019-04-13         1.7           Created Destructor
+Luiz Diego Garcia           2019-04-13         1.8           Removed display();
+Luiz Diego Garcia           2019-04-14         1.9           Added ostream overloaded <<
+Luiz Diego Garcia           2019-04-14         1.10          Added Unicode chars for exponets
+Luiz Diego Garcia           2019-04-14         1.11          Fixed muliplication overload
+Luiz Diego Garcia           2019-04-14         1.12          Fixed == not showing right bool
+Luiz Diego Garcia           2019-04-15         1.13          Fix constructor default init
+Luiz Diego Garcia           2019-04-15         1.14          Moved couts to driver
+Luiz Diego Garcia           2019-04-16         1.15          Created istream overloaded >>
+Luiz Diego Garcia           2019-04-16         1.16          Removed get.poly()
+Luiz Diego Garcia           2019-04-17         1.17          Fixed ostream segm. error
+Luiz Diego Garcia           2019-04-17         1.18          
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
@@ -29,65 +46,18 @@ Polynomial::Polynomial()                            // Constructor
         coef[i] = 0;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           Polynomial::get_poly()
-DESCRIPTION:        
+FUNCTION:           Polynomial::Polynomial(int,int)
+DESCRIPTION:        Overload Constructor
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
-void Polynomial::get_poly()
+Polynomial::Polynomial(int deg, int *arr)              // Overload Constructor
 {
-	cout << endl;
-    cout << "\n Degree of polynomial: ";
-    cin >> degree;
-
-    cout << "\n Enter " << degree+1 << " coefficients: ";
-
-
-    for (int i = degree; i >= 0; i--)
-        cin >> coef[i];
+	this->degree = deg;
+	for(int i = deg; i >= 0; i--)
+	{
+		this->coef[i] = arr[i];
+	}
 }
-/*--------------------------------------------------------------------------------------------------
-FUNCTION:           Polynomial::display_poly()
-DESCRIPTION:        Display polynomial
-RETURNS:            void
---------------------------------------------------------------------------------------------------*/
-void Polynomial::display_poly()
-{
-	const char* exp[10] = {		// Array of Unicode characters
-		"\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",
-		"\u2075", "\u2076", "\u2077", "\u2078", "\u2079"};
-
-	
-	for (int i = degree; i >= 0; i--)
-        {
-			if(coef[i] == 0)
-			{}
-			else
-			{
-				if (i < degree)
-				{
-					if (coef[i] >= 0) cout << " +";
-					else cout << " ";
-				}
-				cout << coef[i];
-					
-				if (i <= 9 && i != 1 && i != 0) 
-				{
-					cout << "x" << exp[i];
-				}
-				else if (i==1) 
-				{
-					cout << "x";
-				}
-				else
-				{
-					if (i>1) cout << "x^" << i;
-					if (i==1) cout << "x";
-				}
-			}
-        }
-        cout << endl;
-        // cout << endl;
-} 
 //  _______________________________________________________________
 // |                                                               |
 // |               Overloaded binary + operator                    |
@@ -96,9 +66,6 @@ void Polynomial::display_poly()
 Polynomial Polynomial::operator + (const Polynomial &p1)
 {
 	Polynomial p2;
-
-	cout << endl;
-	cout << "\n Adding 2 polynomials: ";
 
 	p2.degree = MAX(degree, p1.degree);
 
@@ -116,8 +83,6 @@ Polynomial Polynomial::operator - (const Polynomial &p1)
 {
 	Polynomial p2;
 
-	cout << "\n Subtracting 2 polynomials: ";
-
 	p2.degree = MAX(degree, p1.degree);
 
 	for (int i = p2.degree; i >= 0; i--)
@@ -134,8 +99,6 @@ Polynomial Polynomial::operator * (const Polynomial &p1)
 {
 	Polynomial p2;
 
-	cout << "\n Multiplying 2 polynomials: ";
-
 	p2.degree = degree + p1.degree;
 
 	for(int i = 0; i < degree+1; i++)
@@ -145,7 +108,6 @@ Polynomial Polynomial::operator * (const Polynomial &p1)
 			p2.coef[i+j] += coef[i]*p1.coef[j];
 		}
 	}
-
 	return p2;  
 }
 //  _______________________________________________________________
@@ -175,28 +137,89 @@ Polynomial Polynomial::operator = (const Polynomial &assign)
 // |               Overloaded binary << operator                   |
 // |_______________________________________________________________|
 //
-ostream& operator<<(ostream &lhs, const Polynomial &rhs)
+ostream& operator << (ostream &out, const Polynomial &poly)
 {
-    // return lhs << rhs.print();
+	const char* exp[10] = {		// Array of Unicode characters
+		"\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074",
+		"\u2075", "\u2076", "\u2077", "\u2078", "\u2079"};
 
-	// return out;
+	
+	for (int i = poly.degree; i >= 0; i--)
+        {
+			if(poly.coef[i] == 0) //Excludes coefs 0
+			{}
+			else
+			{
+				if (i < poly.degree)
+				{
+					if (poly.coef[i] >= 0) out << " +";
+					else out << " ";
+				}
+				out << poly.coef[i];
+					
+				if (i <= 9 && i != 1 && i != 0) 
+				{
+					out << "x" << exp[i];
+				}
+				else if (i==1) 
+				{
+					out << "x";
+				}
+				else // If above exponent 9
+				{
+					if (i>1) out << "x^" << i;
+					if (i==1) out << "x";
+				}
+			}
+        }
+        out << endl;
+	return out;
 }
 //  _______________________________________________________________
 // |                                                               |
 // |               Overloaded binary >> operator                   |
 // |_______________________________________________________________|
 //
+istream& operator >> (istream &, Polynomial &poly) 
+{
+	cout << endl;
+    cout << "\n Degree of polynomial: ";
+    cin >> poly.degree;
 
+    cout << "\n Enter " << poly.degree+1 << " coefficients: ";
+
+    for (int i = poly.degree; i >= 0; i--)
+        cin >> poly.coef[i];
+}
+//  _______________________________________________________________
+// |                                                               |
+// |               Overloaded binary () operator                   |
+// |_______________________________________________________________|
+//
 
 //  _______________________________________________________________
 // |                                                               |
 // |               Overloaded binary == operator                   |
 // |_______________________________________________________________|
 //
-
-
+bool Polynomial::operator == (Polynomial &poly) 
+{
+    if(this->degree != poly.degree)
+	{
+		return false;
+	}
+	else
+	{	
+		for(int i = this->degree; i >= 0 ; i--)
+		{
+			if(this->coef[i] != poly.coef[i])
+			return false;
+		}
+	}
+	return true;
+}
 //  _______________________________________________________________
 // |                                                               |
-// |               Overloaded binary () operator                   |
+// |               Overloaded binary    operator                   |
 // |_______________________________________________________________|
 //

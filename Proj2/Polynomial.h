@@ -9,6 +9,16 @@ Author                 Date            Version    Details
 Luiz Diego Garcia      2019-04-10       1.0       Created file
 Luiz Diego Garcia      2019-04-12       1.1       Added end of program prototype
 Luiz Diego Garcia      2019-04-13       1.2       Added prototypes / libraries
+Luiz Diego Garcia      2019-04-17       1.3       Removed get.poly()
+Luiz Diego Garcia      2019-04-17       1.4       Added destructor
+Luiz Diego Garcia      2019-04-17       1.5       Added == Overload
+Luiz Diego Garcia      2019-04-17       1.6       Added - Overload
+Luiz Diego Garcia      2019-04-17       1.7       Added + Overload
+Luiz Diego Garcia      2019-04-17       1.8       Added * Overload
+Luiz Diego Garcia      2019-04-17       1.9       Added = Overload
+Luiz Diego Garcia      2019-04-17       1.10      Added Constructor overload
+Luiz Diego Garcia      2019-04-17       1.11      Added istream >> overload
+Luiz Diego Garcia      2019-04-17       1.12      Added ostream << overload
 ----------------------------------------------------------------------------------------*/
 
 #ifndef __POLYNOMIAL_H__
@@ -43,21 +53,21 @@ class Polynomial
         int coef[99];       // Array of coefficients
 
     public:
-        Polynomial();       // Constructor
-        ~Polynomial();      // Destructor
+        Polynomial();               // Constructor
+        ~Polynomial();              // Destructor
+        Polynomial(int,int*);       // Constructor Overloaded
 
 
-        void get_poly();
-        void display_poly();
-        void Add_2_Polynomials(Polynomial, Polynomial);
-		void Sub_2_Polynomials(Polynomial, Polynomial);
-		void Mul_2_Polynomials(Polynomial, Polynomial);
+        Polynomial operator +  (const Polynomial &);      // Overloaded +  operator
+        Polynomial operator -  (const Polynomial &);      // Overloaded -  operator
+        Polynomial operator *  (const Polynomial &);      // Overloaded *  operator
+        Polynomial operator =  (const Polynomial &);      // Overloaded =  operator
 
-        Polynomial operator + (const Polynomial &);      // Overloaded +  operator
-        Polynomial operator - (const Polynomial &);      // Overloaded -  operator
-        Polynomial operator * (const Polynomial &);      // Overloaded *  operator
-        Polynomial operator = (const Polynomial &);      // Overloaded *  operator
-        ostream& operator  << (const ostream &);         // Overloaded << operator 
+        bool operator == (Polynomial &);                  // Overloaded == operator
+        
+        
+        friend ostream &operator  << (ostream &, const Polynomial &);         // Overloaded << operator 
+        friend istream &operator  >> (istream &, Polynomial &);               // Overloaded >> operator 
 };
 
 
