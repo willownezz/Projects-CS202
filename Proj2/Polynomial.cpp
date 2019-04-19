@@ -18,7 +18,7 @@ Luiz Diego Garcia           2019-04-13         1.7           Created Destructor
 Luiz Diego Garcia           2019-04-13         1.8           Removed display();
 Luiz Diego Garcia           2019-04-14         1.9           Added ostream overloaded <<
 Luiz Diego Garcia           2019-04-14         1.10          Added Unicode chars for exponets
-Luiz Diego Garcia           2019-04-14         1.11          Fixed muliplication overload
+Luiz Diego Garcia           2019-04-14         1.11          Fixed multiplication overload
 Luiz Diego Garcia           2019-04-14         1.12          Fixed == not showing right bool
 Luiz Diego Garcia           2019-04-15         1.13          Fix constructor default init
 Luiz Diego Garcia           2019-04-15         1.14          Moved couts to driver
@@ -196,16 +196,15 @@ FUNCTION:           Polynomial Polynomial::operator () ()
 DESCRIPTION:        Overloaded binary () operator
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
-double Polynomial::operator () (double x)
-{
-	double polyTemp = 0;
-	int deg = this->degree;
-	for(int i = deg; i >= 0; i--)
-	{
-		polyTemp += pow(x, deg--)*(this->coef[i]);
-	}
-	return polyTemp;
-}
+// double Polynomial::operator () (double x)
+// {
+// 	double polyTemp = 0;
+// 	int deg = this->degree;
+// 	for(int i = deg; i >= 0; i--)
+// 	{
+// 	}
+// 	return polyTemp;
+// }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           Polynomial Polynomial::operator == ()
 DESCRIPTION:        Overloaded binary == operator
@@ -227,8 +226,3 @@ bool Polynomial::operator == (Polynomial &poly)
 	}
 	return true;
 }
-/*--------------------------------------------------------------------------------------------------
-FUNCTION:           Polynomial Polynomial::operator -- ()
-DESCRIPTION:        Overloaded binary -- operator
-RETURNS:            
---------------------------------------------------------------------------------------------------*/

@@ -65,7 +65,7 @@ class Polynomial
         Polynomial operator =  (const Polynomial &);      // Overloaded =  operator
 
         bool operator == (Polynomial &);                  // Overloaded == operator
-        double operator () (double x);                    // Overloaded () operator
+        // double operator () (double x);                    // Overloaded () operator
         
         
         friend ostream &operator  << (ostream &, const Polynomial &);         // Overloaded << operator 

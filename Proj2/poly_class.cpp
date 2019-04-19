@@ -94,7 +94,7 @@ int main ()
     Polynomial polyOver = Polynomial(poly[0]);
     cout << " " << polyOver <<endl;
 
-    cin >> (i);
+    // cin >> (i);
     cout << " f(" << "x" << ") = " << poly[1] << endl; 
     cout << " f(" << i << ") = " << poly[1] << endl; 
 
