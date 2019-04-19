@@ -51,6 +51,7 @@ class Polynomial
     private:
         int degree;         // Degree of the polynomial
         int coef[99];       // Array of coefficients
+        int x = 0;
 
     public:
         Polynomial();               // Constructor
@@ -64,6 +65,7 @@ class Polynomial
         Polynomial operator =  (const Polynomial &);      // Overloaded =  operator
 
         bool operator == (Polynomial &);                  // Overloaded == operator
+        double operator () (double x);                    // Overloaded () operator
         
         
         friend ostream &operator  << (ostream &, const Polynomial &);         // Overloaded << operator 

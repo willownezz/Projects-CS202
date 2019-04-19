@@ -41,6 +41,7 @@ int main ()
     //Overload Constructor test
     int degree = 5;
     int coefficients[10] = {1,4,4,5,7,8};
+    int i;
 
     for (int n=0; n < 2; n++)
     {
@@ -92,6 +93,11 @@ int main ()
     // Polynomial polyOver = Polynomial(degree, coefficients);
     Polynomial polyOver = Polynomial(poly[0]);
     cout << " " << polyOver <<endl;
+
+    cin >> (i);
+    cout << " f(" << "x" << ") = " << poly[1] << endl; 
+    cout << " f(" << i << ") = " << poly[1] << endl; 
+
 
 	EndOfProgram(cout);
     return 0;

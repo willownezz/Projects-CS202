@@ -15,10 +15,3 @@ EOF
 2
 9 8 7
 EOF
-
-./poly_class << EOF
-9
-3 4 4
-3
-7 7 7 7
-EOF

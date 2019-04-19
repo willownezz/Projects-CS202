@@ -11,7 +11,7 @@
 # Luiz Diego Garcia    2019-04-12      1.1                 Added poly_class
 # Luiz Diego Garcia    2019-04-13      1.2                 added Polynomial and po_class.o
 # Luiz Diego Garcia    2019-04-13      1.2                 added %.o
-# Luiz Diego Garcia    2019-04-18      1.3                 
+# Luiz Diego Garcia    2019-04-18      1.3                 Changed to Matrix
 # ---------------------------------------------------------------------------------------
 #
 #           This is out original generic makefile command that will build

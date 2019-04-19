@@ -25,7 +25,7 @@ Luiz Diego Garcia           2019-04-15         1.14          Moved couts to driv
 Luiz Diego Garcia           2019-04-16         1.15          Created istream overloaded >>
 Luiz Diego Garcia           2019-04-16         1.16          Removed get.poly()
 Luiz Diego Garcia           2019-04-17         1.17          Fixed ostream segm. error
-Luiz Diego Garcia           2019-04-17         1.18          
+Luiz Diego Garcia           2019-04-17         1.18          Fixed headers
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
@@ -58,11 +58,11 @@ Polynomial::Polynomial(int deg, int *arr)              // Overload Constructor
 		this->coef[i] = arr[i];
 	}
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary + operator                    |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator + ()
+DESCRIPTION:        Overloaded binary + operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 Polynomial Polynomial::operator + (const Polynomial &p1)
 {
 	Polynomial p2;
@@ -74,11 +74,11 @@ Polynomial Polynomial::operator + (const Polynomial &p1)
 
 	return p2;      
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary - operator                    |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator - ()
+DESCRIPTION:        Overloaded binary - operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 Polynomial Polynomial::operator - (const Polynomial &p1)
 {
 	Polynomial p2;
@@ -90,11 +90,11 @@ Polynomial Polynomial::operator - (const Polynomial &p1)
 
 	return p2;      
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary * operator                    |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator * ()
+DESCRIPTION:        Overloaded binary * operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 Polynomial Polynomial::operator * (const Polynomial &p1)
 {
 	Polynomial p2;
@@ -110,17 +110,17 @@ Polynomial Polynomial::operator * (const Polynomial &p1)
 	}
 	return p2;  
 }
-//  _______________________________________________________________
-// |                                                               |
-// |                         Destructor                            |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial::~Polynomial()
+DESCRIPTION:        Destructor
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 Polynomial::~Polynomial(){}
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary = operator                    |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator = ()
+DESCRIPTION:        Overloaded binary = operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 Polynomial Polynomial::operator = (const Polynomial &assign)
 {
 	this->degree = assign.degree;
@@ -132,11 +132,11 @@ Polynomial Polynomial::operator = (const Polynomial &assign)
 
 	return *this;
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary << operator                   |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator << ()
+DESCRIPTION:        ostream binary << operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 ostream& operator << (ostream &out, const Polynomial &poly)
 {
 	const char* exp[10] = {		// Array of Unicode characters
@@ -175,11 +175,11 @@ ostream& operator << (ostream &out, const Polynomial &poly)
         out << endl;
 	return out;
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary >> operator                   |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator >> ()
+DESCRIPTION:        istream& >> operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 istream& operator >> (istream &, Polynomial &poly) 
 {
 	cout << endl;
@@ -191,17 +191,26 @@ istream& operator >> (istream &, Polynomial &poly)
     for (int i = poly.degree; i >= 0; i--)
         cin >> poly.coef[i];
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary () operator                   |
-// |_______________________________________________________________|
-//
-
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary == operator                   |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator () ()
+DESCRIPTION:        Overloaded binary () operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+double Polynomial::operator () (double x)
+{
+	double polyTemp = 0;
+	int deg = this->degree;
+	for(int i = deg; i >= 0; i--)
+	{
+		polyTemp += pow(x, deg--)*(this->coef[i]);
+	}
+	return polyTemp;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator == ()
+DESCRIPTION:        Overloaded binary == operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
 bool Polynomial::operator == (Polynomial &poly) 
 {
     if(this->degree != poly.degree)
@@ -218,8 +227,8 @@ bool Polynomial::operator == (Polynomial &poly)
 	}
 	return true;
 }
-//  _______________________________________________________________
-// |                                                               |
-// |               Overloaded binary    operator                   |
-// |_______________________________________________________________|
-//
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           Polynomial Polynomial::operator -- ()
+DESCRIPTION:        Overloaded binary -- operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
