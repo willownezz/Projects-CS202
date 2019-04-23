@@ -10,20 +10,18 @@
 
 using namespace std;
 
-template<class T>		//Create a template
 class Matrix
 {
 	private:
 		int rows;
 		int cols;
-		//int **array;
-		T **array;				//Creates and array with data type T (any)
+		int **array;
 
 	public:
 		Matrix(int rows, int cols);			//Overloaded Constructor
 		~Matrix();							//Destructor
-		T get(int i, int j);				//Accessor
-		void set(int i, int j, T k);		//Mutator
+		int get(int i, int j);				//Accessor
+		void set(int i, int j, int k);		//Mutator
 		void display();						//Accessor for output
 };
 
