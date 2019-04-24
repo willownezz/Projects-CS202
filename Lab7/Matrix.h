@@ -1,8 +1,20 @@
-
+/*--------------------------------------------------------------------------------------------------
+FILE NAME:          Matrix.h
+DESCRIPTION:        Header file
+COMPILER:           GNU g++ compiler on Linux
+USAGE:              
+MODIFICATION HISTORY:
+Author                      Date               Version       Details
+-----------------           ----------         --------      ---------------------------------------
+Luiz Diego Garcia           2019-04-23         1.0           Created File
+--------------------------------------------------------------------------------------------------*/
 
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
+//////////////////////////////////////
+//Libraries
+//////////////////////////////////////
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -10,6 +22,14 @@
 
 using namespace std;
 
+//////////////////////////////////////
+// Prototypes
+//////////////////////////////////////
+void EndOfProgram(ostream &out);
+
+//////////////////////////////////////
+//Classes
+//////////////////////////////////////
 template<class T>		//Create a template
 class Matrix
 {

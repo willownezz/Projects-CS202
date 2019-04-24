@@ -1,8 +1,32 @@
+/*--------------------------------------------------------------------------------------------------
+FILE NAME:          matrix_test3.cpp
+DESCRIPTION:        main(); -- Driver function
+COMPILER:           GNU g++ compiler on Linux
+USAGE:              ./matrix_test3 -inp *file*
+MODIFICATION HISTORY:
+Author                      Date               Version       Details
+-----------------           ----------         --------      ---------------------------------------
+Luiz Diego Garcia           2019-04-23         1.0           Created File
+--------------------------------------------------------------------------------------------------*/
+
+//////////////////////////////////////
+//Libraries
+//////////////////////////////////////
 //#include "Matrix.h"
 #include "Matrix.cpp"
 
 typedef unsigned char byte;
 
+//////////////////////////////////////
+// Constant Variables
+//////////////////////////////////////
+const char PROGRAMMER_NAME[] = "Luiz Diego Garcia";
+
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           main()
+DESCRIPTION:        start of the program - Driver function
+RETURNS:            0
+--------------------------------------------------------------------------------------------------*/
 int main(int argc, char *argv[])
 {
 //	int k;
@@ -52,5 +76,20 @@ int main(int argc, char *argv[])
 	mat1.display();
 	infile.close();
 
-	return 0;
+	EndOfProgram(cout);
+    return 0;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           EndOfProgram()
+DESCRIPTION:        Signature and date stamp
+RETURNS:            void
+--------------------------------------------------------------------------------------------------*/
+void EndOfProgram(ostream &out)
+{
+	out << endl << endl;
+	out << " Programmed by: " << PROGRAMMER_NAME << " -- ";
+	out << __DATE__ << "  " __TIME__ << endl;
+	out << endl;
+
+	return;
 }
