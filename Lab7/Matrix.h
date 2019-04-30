@@ -42,10 +42,14 @@ class Matrix
 	public:
 		Matrix(int rows, int cols);			//Overloaded Constructor
 		~Matrix();							//Destructor
-		T get(int i, int j);				//Accessor
+		T get(int i, int j) const ;			//Accessor
 		void set(int i, int j, T k);		//Mutator
 		void display();						//Accessor for output
+		
+		template<class T1>
+		friend ostream &operator << (ostream &, const Matrix<T1> &);
+		template<class T1>
+		friend istream &operator >> (istream &, Matrix<T1> &);
 };
 
 #endif
-

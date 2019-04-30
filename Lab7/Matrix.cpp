@@ -39,7 +39,7 @@ DESCRIPTION:        Getter
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
 template<class T>
-T Matrix<T>::get(int i, int j)
+T Matrix<T>::get(int i, int j) const
 {
 	return array[i][j];
 }
@@ -86,3 +86,50 @@ Matrix<T>::~Matrix()
 
 	delete [] array;				 //Delete pointer
 }
+
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        Destructor
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+ostream &operator << (ostream &strm, const Matrix<T> &array)
+{
+	cout << endl;
+	for(int i = 0; i < array.rows; i++)
+	{
+		for(int j = 0; j < array.cols; j++)
+		{
+			strm << setw(4) << array.get(i,j);
+		}
+		cout << endl;
+	}
+	return strm;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        Destructor
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+istream &operator >> (istream &strm, Matrix<T> &array)
+{
+	T k;
+	
+	for(int i = 0; i < array.rows; i++)
+	{
+		for(int j = 0; j < array.cols; j++)
+		{
+			strm >> k;
+			array.set(i,j,k);
+		}	
+	}
+	return strm;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        Copy
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+

@@ -12,7 +12,6 @@ Luiz Diego Garcia           2019-04-23         1.0           Created File
 //////////////////////////////////////
 //Libraries
 //////////////////////////////////////
-//#include "Matrix.h"
 #include "Matrix.cpp"
 
 typedef unsigned char byte;
@@ -36,6 +35,7 @@ int main(int argc, char *argv[])
 	char let_x;
 	char file1[20];
 	ifstream infile;
+	ofstream outfile;
 	string cmd;
 
 	if(argc<3)
@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
 		strcpy(file1, *++argv);
 		strcat(file1, ".mtx");
 		infile.open(file1);
+
 		if(!infile)	
 		{
 			cout << "\n Error opening file: " << file1 << "\n\n";
@@ -60,10 +61,10 @@ int main(int argc, char *argv[])
 	
 	infile >> m >> let_x >> n;
 
-//  Matrix<int>  mat1(m, n);
+	Matrix<int>  mat1(m, n);
 //  Matrix<double>  mat1(m, n);
-	Matrix<byte>  mat1(m, n);
-
+//	Matrix<byte>  mat1(m, n);
+/*
 	for(int i = 0; i < m; i++)
 	{
 		for(int j = 0; j < n; j++)
@@ -72,9 +73,26 @@ int main(int argc, char *argv[])
 			mat1.set(i, j, k);
 		}
 	}
+*/
+	
+	if(argc > 4) cmd = *++argv;
 
+	if(cmd == "-out")
+	{
+		strcpy(file1, *++argv);
+		strcat(file1, ".mtx");
+		outfile.open(file1);
+
+		if(!outfile)
+		{
+			cout << "\nError opening file: " << file1 << "\n\n";
+			return 0;
+		} 
+		outfile << mat1;
+		outfile.close();
+	}
 	mat1.display();
-	infile.close();
+//	infile.close();
 
 	EndOfProgram(cout);
     return 0;
