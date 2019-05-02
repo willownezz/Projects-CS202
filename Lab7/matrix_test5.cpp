@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------------------------------------
-FILE NAME:          matrix_test3.cpp
+FILE NAME:          matrix_test5.cpp
 DESCRIPTION:        main(); -- Driver function
 COMPILER:           GNU g++ compiler on Linux
 USAGE:              ./matrix_test3 -inp *file*
@@ -28,8 +28,6 @@ RETURNS:            0
 --------------------------------------------------------------------------------------------------*/
 int main(int argc, char *argv[])
 {
-//	int k;
-//  double k;
 	byte k;
 	int m,n;
 	char let_x;
@@ -61,19 +59,8 @@ int main(int argc, char *argv[])
 	
 	infile >> m >> let_x >> n;
 
-//  Matrix<int>  mat1(m, n);
-//  Matrix<double>  mat1(m, n);
 	Matrix<byte>  mat1(m, n);
-/*
-	for(int i = 0; i < m; i++)
-	{
-		for(int j = 0; j < n; j++)
-		{
-			infile >> k;
-			mat1.set(i, j, k);
-		}
-	}
-*/
+	
 	infile >> mat1;
 	infile.close();	
 
