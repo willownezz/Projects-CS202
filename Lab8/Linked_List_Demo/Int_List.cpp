@@ -6,13 +6,20 @@ USAGE:
 MODIFICATION HISTORY:
 Author                      Date               Version       Details
 -----------------           ----------         --------      ---------------------------------------
-Luiz Diego Garcia           2019-04-29         1.0           Created File
+Luiz Diego Garcia           2019-04-02         1.0           Created File
+Luiz Diego Garcia           2019-04-02         2.0           Added append function
+Luiz Diego Garcia           2019-05-02         3.0           Added display function
+Luiz Diego Garcia           2019-05-02         4.0           Added Insert function
+Luiz Diego Garcia           2019-05-02         5.0           Added delete function
+Luiz Diego Garcia           2019-05-02         6.0           Added destructor
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
 //Libraries
 //////////////////////////////////////
 #include "Int_List.h"
+
+
 
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           LinkList<T>::appendNode(T newValue)
@@ -42,8 +49,8 @@ void LinkList<T>::appendNode(T newValue)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           LinkList<T>::appendNode(T newValue)
-DESCRIPTION:        Appends a node containing the value
+FUNCTION:           LinkList<T>::displayList() const
+DESCRIPTION:        Displays into screen
 RETURNS:      		void      
 --------------------------------------------------------------------------------------------------*/
 template<class T>
@@ -61,8 +68,8 @@ void LinkList<T>::displayList() const
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           LinkList<T>::appendNode(T newValue)
-DESCRIPTION:        Appends a node containing the value
+FUNCTION:           LinkList<T>::insertNode(T newValue)
+DESCRIPTION:        Inserts a node containing the value
 RETURNS:      		void      
 --------------------------------------------------------------------------------------------------*/
 template<class T>
@@ -105,8 +112,8 @@ void LinkList<T>::insertNode(T newValue)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           LinkList<T>::appendNode(T newValue)
-DESCRIPTION:        Appends a node containing the value
+FUNCTION:           LinkList<T>::deleteNode(T searchValue)
+DESCRIPTION:        Deletes a node containing the value
 RETURNS:      		void      
 --------------------------------------------------------------------------------------------------*/
 template<class T>
@@ -144,8 +151,8 @@ void LinkList<T>::deleteNode(T searchValue)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           LinkList<T>::appendNode(T newValue)
-DESCRIPTION:        Appends a node containing the value
+FUNCTION:           LinkList<T>::~LinkList()
+DESCRIPTION:        Destructor
 RETURNS:      		void      
 --------------------------------------------------------------------------------------------------*/
 template<class T>

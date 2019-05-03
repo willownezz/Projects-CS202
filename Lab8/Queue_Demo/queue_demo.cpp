@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------------------------------------
-FILE NAME:          linked_list_demo.cpp
+FILE NAME:          queue_demo.cpp
 DESCRIPTION:        main(); -- Driver File
 COMPILER:           GNU g++ compiler on Linux
 USAGE:              
@@ -7,14 +7,15 @@ MODIFICATION HISTORY:
 Author                      Date               Version       Details
 -----------------           ----------         --------      ---------------------------------------
 Luiz Diego Garcia           2019-04-29         1.0           Created File
+Luiz Diego Garcia           2019-04-29         2.0           Added EndOfProgram function
+Luiz Diego Garcia           2019-04-29         3.0           Created queue
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
 //Libraries
 //////////////////////////////////////
-#include "Int_List.cpp"
+#include "Dyn_Queue.cpp"
 
-// typedef unsigned char byte;
 
 //////////////////////////////////////
 // Constant Variables
@@ -26,9 +27,19 @@ FUNCTION:           main()
 DESCRIPTION:        start of the program - Driver function
 RETURNS:            0
 --------------------------------------------------------------------------------------------------*/
-int main(int argc, char *argv[])
+int main()
 {
-	cout << " Hello" << endl;
+	DynQueue<int> queue;
+	int numList[] = {1,2,3};
+	int *ptr = NULL;
+	int size = sizeof(numList)/sizeof(numList[0]);
+	ptr = numList;
+	cout << "test" << endl;
+
+	for(int i = 0; i < size; i++)
+	{
+		queue.enqueue(*(ptr+i));
+	}
 }
 
 /*--------------------------------------------------------------------------------------------------
