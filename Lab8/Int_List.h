@@ -63,6 +63,7 @@ class LinkList
 		void insertNode(T);
 		void deleteNode(T);
 		void displayList() const;
+		
 };
 
 #endif

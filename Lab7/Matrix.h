@@ -33,7 +33,7 @@ void EndOfProgram(ostream &out);
 template<class T>		//Create a template
 class Matrix
 {
-	private:
+	private:    //protected ??
 		int rows;
 		int cols;
 		//int **array;
