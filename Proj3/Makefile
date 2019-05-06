@@ -11,6 +11,7 @@
 # Luiz Diego Garcia    2019-04-12      1.1                 Added poly_class
 # Luiz Diego Garcia    2019-04-13      1.2                 added Polynomial and po_class.o
 # Luiz Diego Garcia    2019-04-13      1.2                 added %.o
+# Luiz Diego Garcia    2019-04-18      1.3                 changed to matrix_test3 
 # ---------------------------------------------------------------------------------------
 #
 #           This is out original generic makefile command that will build
@@ -22,20 +23,23 @@
 	g++ -o $* $*.cpp -std=c++11
 	
 #
-#           This will build the two object files required for "poly_class"
+#           This will build the two object files required for "matrix_test3"
 #           and link them into a single executable.
-#           Usage: make poly_class
+#           Usage: make matrix_test3
 #
 
-poly_class : Polynomial.o poly_class.o
-	g++ -o $@ $@.o Polynomial.o  -std=c++11
+matrix_test3 : Matrix.o matrix_test3.o
+	g++ -o $@ $@.o Matrix.o  -std=c++11
 
 #
-#			This will build the two object files required for "poly_class"
-#			which are dependent on Polynomial.h
+#			This will build the two object files required for "matrix_test1"
+#			which are dependent on Matrix.h
 #
 
-%.o : %.cpp Polynomial.h
+%.o : %.cpp Matrix.h
 	g++ -c $< -std=c++11
 
+matrix_test3: Matrix.cpp Matrix.h
+matrix_test4: Matrix.cpp Matrix.h
+matrix_test5: Matrix.cpp Matrix.h
 # ---------------------------------------------------------------------------------------
