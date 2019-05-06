@@ -23,23 +23,21 @@
 	g++ -o $* $*.cpp -std=c++11
 	
 #
-#           This will build the two object files required for "matrix_test3"
+#           This will build the two object files required for "matrix_test5"
 #           and link them into a single executable.
-#           Usage: make matrix_test3
+#           Usage: make matrix_test5
 #
 
-matrix_test3 : Matrix.o matrix_test3.o
+matrix_test5 : Matrix.o matrix_test5.o
 	g++ -o $@ $@.o Matrix.o  -std=c++11
 
 #
-#			This will build the two object files required for "matrix_test1"
+#			This will build the two object files required for "matrix_test5"
 #			which are dependent on Matrix.h
 #
 
 %.o : %.cpp Matrix.h
 	g++ -c $< -std=c++11
 
-matrix_test3: Matrix.cpp Matrix.h
-matrix_test4: Matrix.cpp Matrix.h
 matrix_test5: Matrix.cpp Matrix.h
 # ---------------------------------------------------------------------------------------
