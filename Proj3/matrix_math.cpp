@@ -2,12 +2,22 @@
 FILE NAME:          matrix_math.cpp
 DESCRIPTION:        main(); -- Driver function
 COMPILER:           GNU g++ compiler on Linux
-USAGE:              ./matrix_math -inp *file* -out outFile
+USAGE:              ./matrix_math -inp *file* -out outFile...
 MODIFICATION HISTORY:
 Author                      Date               Version       Details
 -----------------           ----------         --------      ---------------------------------------
 Luiz Diego Garcia           2019-04-23         1.0           Created File
 Luiz Diego Garcia           2019-04-23         1.1           Added EndOfProgram function
+Luiz Diego Garcia           2019-04-23         1.2           include matrix.cpp
+Luiz Diego Garcia           2019-04-23         1.3           Fixed open file check 
+Luiz Diego Garcia           2019-04-23         1.4           Changed 'not enough args' from 3 to 2
+Luiz Diego Garcia           2019-04-23         1.5           Created defaut constructor
+Luiz Diego Garcia           2019-04-23         1.6           created typdef
+Luiz Diego Garcia           2019-04-23         1.7           changed Matrix from INT to double
+Luiz Diego Garcia           2019-04-23         1.8           added arg -inp to read files
+Luiz Diego Garcia           2019-04-23         1.9           added arg -out to save data
+Luiz Diego Garcia           2019-04-23         1.10          Created ifstream / ofstream
+Luiz Diego Garcia           2019-04-23         1.11          Added -h help file (argv)         
 --------------------------------------------------------------------------------------------------*/
 
 // ... change input operator
@@ -46,7 +56,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	cmd = *++argv;
+	cmd = *++argv;					//Saves arg into string 'cmd'
 	
 	// Calls help file
 	if(cmd == "-h")
@@ -70,7 +80,8 @@ int main(int argc, char *argv[])
 	
 	infile >> m >> let_x >> n;
 
-	Matrix<int>  mat1(m, n);
+	// Matrix<int>  mat1(m, n);
+	Matrix<double>  mat1(m, n);
 	//Matrix<byte>  mat1(m, n);
 	
 	infile >> mat1;
@@ -119,7 +130,7 @@ RETURNS:            void
 void HelpFile()
 {
 	cout << " ____________________________________________________________________________________" << 	endl;
-	cout << "| ./matrix_math -inp *file*                          Open file matrix                |"<< 	endl;
+	cout << "| ./matrix_math -inp *file*                          Open file matrix & displays it  |"<< 	endl;
 	cout << "| ./matrix_math -inp *file* -out *outFileName*       Open and saves to a new file    |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
