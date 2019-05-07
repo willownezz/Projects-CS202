@@ -143,7 +143,7 @@ RETURNS:
 template<class T>
 Matrix<T>::Matrix()
 {
-	cout << "Teesssstt" << endl;
+	cout << "Inside Defaut" << endl;
 	rows = 0;
 	cols = 0;
 	T **array = NULL;

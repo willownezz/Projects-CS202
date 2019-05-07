@@ -80,7 +80,9 @@ int main(int argc, char *argv[])
 	
 	infile >> m >> let_x >> n;
 
+	Matrix<double> math1;
 	Matrix<double>  mat1(m, n);		//Read numbers
+
 
 	infile >> mat1;
 
