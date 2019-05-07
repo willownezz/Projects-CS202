@@ -7,6 +7,15 @@ MODIFICATION HISTORY:
 Author                      Date               Version       Details
 -----------------           ----------         --------      ---------------------------------------
 Luiz Diego Garcia           2019-04-23         1.0           Created File
+Luiz Diego Garcia           2019-05-01         1.1           Created constructor
+Luiz Diego Garcia           2019-05-01         1.2           Added getter
+Luiz Diego Garcia           2019-05-01         1.3           Added setter
+Luiz Diego Garcia           2019-05-02         1.4           Created display()
+Luiz Diego Garcia           2019-05-03         1.5           Addde destructor
+Luiz Diego Garcia           2019-05-03         1.6           Created ofstream overloaded ope.
+Luiz Diego Garcia           2019-05-05         1.7           Created ifstream overloaded ope.
+Luiz Diego Garcia           2019-05-05         1.8           Created defaut constructor
+Luiz Diego Garcia           2019-05-06         1.9           Changed library include
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
