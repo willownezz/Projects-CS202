@@ -81,10 +81,12 @@ int main(int argc, char *argv[])
 	infile >> m >> let_x >> n;
 
 	// Matrix<int>  mat1(m, n);
-	Matrix<double>  mat1(m, n);
-	//Matrix<byte>  mat1(m, n);
-	
+	// Matrix<double>  mat1(m, n);		//Read numbers
+	Matrix<byte>  mat1(m, n);		//Read chars
+
 	infile >> mat1;
+
+	
 	infile.close();	
 
 	if(argc > 4) cmd = *++argv;
@@ -133,7 +135,7 @@ void HelpFile()
 	cout << "| ./matrix_math -inp *file*                          Open file matrix & displays it  |"<< 	endl;
 	cout << "| ./matrix_math -inp *file* -out *outFileName*       Open and saves to a new file    |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
-	cout << "|                                                                                    |"<< 	endl;
+	cout << "| ./matrix_math -h                                   Open help files                 |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
 	cout << "|                                                                                    |"<< 	endl;
