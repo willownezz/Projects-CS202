@@ -10,8 +10,9 @@
 # Luiz Diego Garcia    2019-04-12      1.0                 Created File
 # Luiz Diego Garcia    2019-04-12      1.1                 Added poly_class
 # Luiz Diego Garcia    2019-04-13      1.2                 added Polynomial and po_class.o
-# Luiz Diego Garcia    2019-04-13      1.2                 added %.o
-# Luiz Diego Garcia    2019-04-18      1.3                 changed to matrix_test3 
+# Luiz Diego Garcia    2019-04-13      1.3                 added %.o
+# Luiz Diego Garcia    2019-04-18      1.4                 changed to matrix_test3 
+# Luiz Diego Garcia    2019-05-06      1.5                 changed to matrix_math 
 # ---------------------------------------------------------------------------------------
 #
 #           This is out original generic makefile command that will build
@@ -23,21 +24,21 @@
 	g++ -o $* $*.cpp -std=c++11
 	
 #
-#           This will build the two object files required for "matrix_test5"
+#           This will build the two object files required for "matrix_math"
 #           and link them into a single executable.
-#           Usage: make matrix_test5
+#           Usage: make matrix_math
 #
 
-matrix_test5 : Matrix.o matrix_test5.o
+matrix_math : Matrix.o matrix_math.o
 	g++ -o $@ $@.o Matrix.o  -std=c++11
 
 #
-#			This will build the two object files required for "matrix_test5"
+#			This will build the two object files required for "matrix_math"
 #			which are dependent on Matrix.h
 #
 
 %.o : %.cpp Matrix.h
 	g++ -c $< -std=c++11
 
-matrix_test5: Matrix.cpp Matrix.h
+matrix_math: Matrix.cpp Matrix.h
 # ---------------------------------------------------------------------------------------

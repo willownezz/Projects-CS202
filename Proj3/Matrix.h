@@ -26,6 +26,7 @@ using namespace std;
 // Prototypes
 //////////////////////////////////////
 void EndOfProgram(ostream &out);
+void HelpFile();
 
 //////////////////////////////////////
 //Classes
@@ -41,10 +42,13 @@ class Matrix
 
 	public:
 		Matrix(int rows, int cols);			//Overloaded Constructor
+		Matrix();							//Defaut
 		~Matrix();							//Destructor
 		T get(int i, int j) const ;			//Accessor
 		void set(int i, int j, T k);		//Mutator
 		void display();						//Accessor for output
+
+
 		
 		template<class T1>
 		friend ostream &operator << (ostream &, const Matrix<T1> &);

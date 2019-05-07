@@ -131,8 +131,11 @@ FUNCTION:
 DESCRIPTION:        Defaut constructor
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
-//template<class T>
-//Matrix<T>::Matrix()
-//{
-
-//}
+template<class T>
+Matrix<T>::Matrix()
+{
+	cout << "Teesssstt" << endl;
+	rows = 0;
+	cols = 0;
+	T **array = NULL;
+}
