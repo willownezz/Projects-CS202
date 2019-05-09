@@ -42,25 +42,50 @@ void HelpFile();
 template<class T>		//Create a template
 class Matrix
 {
-	private:    //protected ??
+	// private:    
+	protected:
 		int rows;
 		int cols;
 		T **array;				//Creates and array with data type T (any)
 
 	public:
-		Matrix(int rows, int cols);			//Overloaded Constructor
-		Matrix();							//Defaut
-		~Matrix();							//Destructor
-		T get(int i, int j) const ;			//Accessor
-		void set(int i, int j, T k);		//Mutator
-		void display();						//Accessor for output
+		Matrix(int rows, int cols);						//Overloaded Constructor
+		Matrix();										//Default Constructor
+		Matrix(const Matrix<T> &);						//Copy Constructor
+		~Matrix();										//Destructor
+		T get(int i, int j) const ;						//Accessor
+		void set(int i, int j, T k);					//Mutator
+		void display();									//Accessor for output
 
-
+		Matrix<T>& operator = (const Matrix<T> &);		// '=' Assigment operator
 		
 		template<class T1>
-		friend ostream &operator << (ostream &, const Matrix<T1> &);
+		friend ostream &operator << (ostream &, const Matrix<T1> &);		//Overloaded output operator
 		template<class T1>
-		friend istream &operator >> (istream &, Matrix<T1> &);
+		friend istream &operator >> (istream &, Matrix<T1> &);				//Overloaded input operator
+};
+
+template<class T>							//Create a template
+class Matrix_ops : public Matrix<T>
+{
+	private:
+		using Matrix<T> :: rows;
+		using Matrix<T> :: cols;
+		using Matrix<T> :: array;
+
+	public:
+		using Matrix<T> :: Matrix;
+		using Matrix<T> :: operator=;
+		
+		Matrix_ops<T>& operator + (const Matrix_ops<T> &); 	//Overloaded +
+		Matrix_ops<T>& operator - (const Matrix_ops<T> &); 	//Overloaded -
+
+		Matrix_ops<T>& operator * (const Matrix_ops<T> &test);
+		Matrix_ops<T>& operator * (double& temp);
+		Matrix_ops<T>& operator / (double& temp);
+
+		bool operator == (const Matrix_ops<T> &);
+	
 };
 
 #endif

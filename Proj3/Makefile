@@ -38,7 +38,8 @@ matrix_math : Matrix.o matrix_math.o
 #
 
 %.o : %.cpp Matrix.h
-	g++ -c $< -std=c++11
+	g++ -c -o $@ $< -std=c++11
 
-matrix_math: Matrix.cpp Matrix.h
+matrix_math : Matrix.cpp Matrix.h
+matrix_math.o : Matrix.o
 # ---------------------------------------------------------------------------------------

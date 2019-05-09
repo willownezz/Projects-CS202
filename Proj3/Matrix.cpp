@@ -25,7 +25,7 @@ Luiz Diego Garcia           2019-05-06         1.9           Changed library inc
 
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           
-DESCRIPTION:        
+DESCRIPTION:        CONSTRUCTOR
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
 template<class T>
@@ -37,10 +37,13 @@ Matrix<T>::Matrix(int n_rows, int n_cols)
 	array = new T*[rows];
 
 	for (int i = 0; i < rows; i++)
+	{
 		array[i] = new T[cols];
-
-	cout << " Matrix cosntructor:  ";
-	cout << rows << " X " << cols << endl;
+		for(int j =0;j<cols;j++)
+		{
+			array[i][j] = 0;
+		}
+	}
 }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           
@@ -64,7 +67,7 @@ void Matrix<T>::set(int i, int j, T k)
 }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           
-DESCRIPTION:        
+DESCRIPTION:        DISPLAY
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
 template<class T>
@@ -89,50 +92,56 @@ RETURNS:
 template<class T>
 Matrix<T>::~Matrix()
 {
-	//delete array;                  //Wont delete the array properly
 	for(int i = 0; i < rows; i++)    //Delete rows and cols
+	{
 		delete [] array[i];
+	}
 
 	delete [] array;				 //Delete pointer
 }
 
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           
-DESCRIPTION:        
+DESCRIPTION:   	OSTREAM     
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 ostream &operator << (ostream &strm, const Matrix<T> &array)
 {
-	cout << endl;
+	strm << " " << array.rows << " X " << array.cols << endl;
+	strm << endl;
 	for(int i = 0; i < array.rows; i++)
 	{
 		for(int j = 0; j < array.cols; j++)
 		{
-			strm << setw(4) << array.get(i,j);
+			strm << setw(5) << setprecision(3) << array.array[i][j];
 		}
-		cout << endl;
+		strm << endl;
 	}
 	return strm;
 }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           
-DESCRIPTION:        
+DESCRIPTION:        ISTREAM
 RETURNS:            
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 istream &operator >> (istream &strm, Matrix<T> &array)
 {
-	T k;
-	
-	for(int i = 0; i < array.rows; i++)
+	int m, n;
+	char let_x;
+	strm >> m >> let_x >> n;
+	Matrix<T> math0 (m, n);
+
+	for(int i = 0; i < math0.rows; i++)
 	{
-		for(int j = 0; j < array.cols; j++)
+		for(int j = 0; j < math0.cols; j++)
 		{
-			strm >> k;
-			array.set(i,j,k);
+			strm >> math0.array[i][j];
 		}	
 	}
+
+	array = math0;
 	return strm;
 }
 /*--------------------------------------------------------------------------------------------------
@@ -143,8 +152,195 @@ RETURNS:
 template<class T>
 Matrix<T>::Matrix()
 {
-	cout << "Inside Defaut" << endl;
 	rows = 0;
 	cols = 0;
-	T **array = NULL;
+	array = NULL;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        Copy constructor
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix<T>::Matrix(const Matrix<T> &old)
+{
+	rows = old.rows;
+	cols = old.cols;
+
+	array = new T*[rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		array[i] = new T[cols];
+		for(int j = 0; j < cols; j++)
+		{
+			array[i][j] = old.array[i][j];
+		}
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        = operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix<T> & Matrix<T>::operator = (const Matrix<T> &old)
+{
+	for(int i = 0; i < rows; i++)
+	{
+		delete [] array[i];
+	}
+	delete [] array;
+
+	rows = old.rows;
+	cols = old.cols;
+
+	array = new T*[rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		array[i] = new T[cols];
+			for(int j = 0; j < cols; j++)
+			{
+				array[i][j] = old.array[i][j];
+			}
+	}
+	return *this;
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        + Overloaded Operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix_ops<T>& Matrix_ops<T>::operator + (const Matrix_ops<T> &temp)
+{
+	if(rows != temp.rows || cols != temp.cols)
+	{
+		throw " Wrong size matrices";
+	}
+	else
+	{
+		for(int i=0;i<rows;i++)
+		{
+			for(int j=0;j<cols;j++)
+			{
+				array[i][j] += temp.array[i][j];
+			}	
+		}
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        - Overloaded Operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix_ops<T>& Matrix_ops<T>::operator - (const Matrix_ops<T> &temp)
+{
+	if(rows != temp.rows || cols != temp.cols)
+	{
+		throw " Wrong size matrices";
+	}
+	else
+	{
+		for(int i=0;i<rows;i++)
+		{
+			for(int j=0;j<cols;j++)
+			{
+				array[i][j] -= temp.array[i][j];
+			}	
+		}
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        * Overloaded Operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix_ops<T>& Matrix_ops<T>::operator * (const Matrix_ops<T> &test)
+{
+	if(cols != test.rows)
+	{
+		throw " Wrong size matrices";
+	}
+	else
+	{
+		Matrix_ops<T> temp(rows, test.cols);
+		for(int i = 0; i < rows; i++)
+		{
+			for(int j = 0; j < test.cols; j++)
+			{
+				for(int k = 0; k < cols; k++)
+				{
+					temp.array[i][j] += array[i][k] * test.array[k][j];
+				}
+			}
+		}
+		*this = temp;
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        * scalar
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix_ops<T>& Matrix_ops<T>::operator * (double& temp)
+{
+	for(int i = 0; i < rows; i++)
+	{
+		for(int j = 0; j < cols; j++)
+		{
+			array[i][j] *= temp;
+		}
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        / scalar
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+Matrix_ops<T>& Matrix_ops<T>::operator / (double& temp)
+{
+	for(int i = 0; i < rows; i++)
+	{
+		for(int j = 0; j < cols; j++)
+		{
+			array[i][j] /= temp;
+		}
+	}
+}
+/*--------------------------------------------------------------------------------------------------
+FUNCTION:           
+DESCRIPTION:        == operator
+RETURNS:            
+--------------------------------------------------------------------------------------------------*/
+template<class T>
+bool Matrix_ops<T>::operator == (const Matrix_ops<T> &temp)
+{
+	bool isFlip = true;
+
+	if(rows != temp.rows || cols != temp.cols)
+	{
+		isFlip = false;
+		return isFlip;
+	} 
+	else
+	{
+		for(int i = 0; i < rows; i++)
+		{
+			for(int j = 0; j < cols; j++)
+			{
+				if(array[i][j] != temp.array[i][j])
+				{
+					isFlip = false;
+					
+				}
+				return isFlip;
+			}
+		}
+	}	
 }
