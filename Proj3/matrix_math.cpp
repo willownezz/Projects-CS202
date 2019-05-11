@@ -253,8 +253,8 @@ void HelpFile()
 	cout << "|                                           HELP FILE                                        |"<< 	endl;
 	cout << "|--------------------------------------------------------------------------------------------|"<< 	endl;
 	cout << "|                                                                                            |"<< 	endl;
-	cout << "|  ./matrix_math -inp   A                           Open and saves to a new file (A.mtx)     |"<< 	endl;
-	cout << "|  ./matrix_math cmds... -out ZZ                    Saves matrix to a file (e.g., ZZ.mtx)    |"<< 	endl;
+	cout << "|  ./matrix_math -inp   A                            Open and saves to a new file (A.mtx)    |"<< 	endl;
+	cout << "|  ./matrix_math cmds... -out ZZ                     Saves matrix to a file (e.g., ZZ.mtx)   |"<< 	endl;
 	cout << "|                                                                                            |"<< 	endl;
 	cout << "|  ./matrix_math -h                                  Open help files screen                  |"<< 	endl;
 	cout << "|                                                                                            |"<< 	endl;
