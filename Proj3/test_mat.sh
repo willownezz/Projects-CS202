@@ -23,7 +23,7 @@ cat ZZ.mtx
 
 
 ./matrix_math -smul A 5
-./matrix_math -smul A 0
+./matrix_math -smul A 1.2
 
 ./matrix_math -sdiv A 5
 ./matrix_math -sdiv A 0

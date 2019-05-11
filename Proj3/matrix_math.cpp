@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------------------------------
 FILE NAME:          matrix_math.cpp
-DESCRIPTION:        main(); -- Driver function
+DESCRIPTION:        main(); (Driver file)
 COMPILER:           GNU g++ compiler on Linux
 USAGE:              ./matrix_math -inp *file* -out outFile...
 MODIFICATION HISTORY:
@@ -12,12 +12,26 @@ Luiz Diego Garcia           2019-04-23         1.2           include matrix.cpp
 Luiz Diego Garcia           2019-04-23         1.3           Fixed open file check 
 Luiz Diego Garcia           2019-04-23         1.4           Changed 'not enough args' from 3 to 2
 Luiz Diego Garcia           2019-04-23         1.5           Created defaut constructor
-Luiz Diego Garcia           2019-04-23         1.6           created typdef
-Luiz Diego Garcia           2019-04-23         1.7           changed Matrix from INT to double
-Luiz Diego Garcia           2019-04-23         1.8           added arg -inp to read files
-Luiz Diego Garcia           2019-04-23         1.9           added arg -out to save data
-Luiz Diego Garcia           2019-04-23         1.10          Created ifstream / ofstream
-Luiz Diego Garcia           2019-04-23         1.11          Added -h help file (argv)         
+Luiz Diego Garcia           2019-05-01         1.6           created typdef
+Luiz Diego Garcia           2019-05-03         1.7           changed Matrix from INT to double
+Luiz Diego Garcia           2019-05-05         1.8           added arg -inp to read files
+Luiz Diego Garcia           2019-05-07         1.9           added arg -out to save data
+Luiz Diego Garcia           2019-05-08         1.10          Created ifstream / ofstream
+Luiz Diego Garcia           2019-05-08         1.11          Added -h help file (argv)         
+Luiz Diego Garcia           2019-05-08         1.12          Changed how argv is handle
+Luiz Diego Garcia           2019-05-08         1.13          else if for -sub  access
+Luiz Diego Garcia           2019-05-08         1.14          else if for -add  access
+Luiz Diego Garcia           2019-05-08         1.15          else if for -mul  access    
+Luiz Diego Garcia           2019-05-08         1.16          else if for -sdiv access
+Luiz Diego Garcia           2019-05-09         1.17          Fixed -out where works with -inp now
+Luiz Diego Garcia           2019-05-09         1.18          else if for -eq access 
+Luiz Diego Garcia           2019-05-09         1.19          Created read file function
+Luiz Diego Garcia           2019-05-09         1.20          else if for -smul access
+Luiz Diego Garcia           2019-05-09         1.21          added args to help -h
+Luiz Diego Garcia           2019-05-09         1.22          moved help file prototype
+Luiz Diego Garcia           2019-05-09         1.23          moved end of program prototype
+Luiz Diego Garcia           2019-05-09         1.24          remove unused variable byte
+Luiz Diego Garcia           2019-05-11         1.25          Added couts defining each step
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
@@ -25,11 +39,12 @@ Luiz Diego Garcia           2019-04-23         1.11          Added -h help file 
 //////////////////////////////////////
 #include "Matrix.cpp"
 
-typedef unsigned char byte;
 
 //////////////////////////////////////
 // Prototypes
 //////////////////////////////////////
+void EndOfProgram(ostream &out);
+void HelpFile();
 void ReadFile(char * fname, Matrix_ops<double> &);
 
 //////////////////////////////////////
@@ -44,7 +59,7 @@ RETURNS:            0
 --------------------------------------------------------------------------------------------------*/
 int main(int argc, char *argv[])
 {
-	byte k;
+
 	int m,n;
 	char let_x;
 	char file1[20];				//First matrix
@@ -79,6 +94,7 @@ int main(int argc, char *argv[])
 		{
 			ReadFile(argv[i+1], test1);
 
+			cout << " Displaying matrix test: " << endl;
 			cout << " Matrix 1: \n" << test1;
 			mat1 = test1;
 		}
@@ -88,6 +104,7 @@ int main(int argc, char *argv[])
 			ReadFile(argv[i+1], test1);
 			ReadFile(argv[i+2], test2);
 
+			cout << " Addition test......................... " << endl;
 			cout << " Matrix 1: " << test1 << endl;
 			cout << "\n Matrix 2: " << test2 << endl;
 
@@ -107,6 +124,7 @@ int main(int argc, char *argv[])
 			ReadFile(argv[i+1], test1);
 			ReadFile(argv[i+2], test2);
 
+			cout << " Subtraction test......................... " << endl;
 			cout << " Matrix 1: " << test1 << endl;
 			cout << "\n Matrix 2: " << test2 << endl;
 
@@ -124,7 +142,8 @@ int main(int argc, char *argv[])
 		{
 			ReadFile(argv[i+1], test1);
 			ReadFile(argv[i+2], test2);
-
+			
+			cout << " Multiplication test......................... " << endl;
 			cout << " Matrix 1: " << test1 << endl;
 			cout << "\n Matrix 2: " << test2 << endl;
 			try
@@ -144,6 +163,7 @@ int main(int argc, char *argv[])
 			double temp;
 			temp = atof(argv[i+2]);
 	
+			cout << " Scalar Multiplication test.................. " << endl;
 			cout << " Matrix : " << test1 << endl;
 			test1 * temp;
 			cout << "\n New matrix "  << test1;
@@ -157,12 +177,14 @@ int main(int argc, char *argv[])
 			double temp;
 			temp = atof(argv[i+2]);
 
+			cout << " Scalar Division test.................. " << endl;
+
 			if(temp == 0)
 			{
-				cout << " Can't divide by 0" << endl;
+				cout << " Can't divide by 0" << endl << endl;
 				return 0;
 			}
-
+			
 			cout << " Matrix : " << test1 << endl;
 			test1 / temp;
 			cout << "\n New matrix "  << test1;
@@ -177,10 +199,13 @@ int main(int argc, char *argv[])
 			bool hold;
 			hold = test1 == test2;
 
+			cout << " Comparison matrices test.................. " << endl;
+
+
 			if(!hold)
-				cout<<" Matrices are NOT equal";
+				cout<<" Matrices are NOT equal" << endl;
 			if(hold)
-				cout<<" Matrices are equal";
+				cout<<" Matrices are equal" << endl;
 		}
 		if(cmd == "-out")
 		{
@@ -194,6 +219,8 @@ int main(int argc, char *argv[])
 				return 0;
 			} 
 			outfile << mat1;
+			cout << endl << endl;
+			cout << " Saving matrix to file " << file1 << endl;
 			outfile.close();
 		}
 	}
@@ -221,23 +248,23 @@ RETURNS:            void
 --------------------------------------------------------------------------------------------------*/
 void HelpFile()
 {
-	cout << " ____________________________________________________________________________________" << 	endl;
-	cout << "|------------------------------------------------------------------------------------|"<< 	endl;
-	cout << "|                                    HELP FILE                                       |"<< 	endl;
-	cout << "|------------------------------------------------------------------------------------|"<< 	endl;
-	cout << "|                                                                                    |"<< 	endl;
-	cout << "|  ./matrix_math -inp   A                           Open and saves to a new file     |"<< 	endl;
-	cout << "|  ./matrix_math cmds... -out fileOutput                                             |"<< 	endl;
-	cout << "|                                                                                    |"<< 	endl;
-	cout << "|  ./matrix_math -h                                  Open help files                 |"<< 	endl;
-	cout << "|                                                                                    |"<< 	endl;
-	cout << "|  ./matrix_math -add  A B                                                           |"<< 	endl;
-	cout << "|  ./matrix_math -sub  A B                                                           |"<< 	endl;
-	cout << "|  ./matrix_math -mul  A B                                                           |"<< 	endl;
-	cout << "|  ./matrix_math -smul A n                                                           |"<< 	endl;
-	cout << "|  ./matrix_math -sdiv A n                                                           |"<< 	endl;
-	cout << "|  ./matrix_math -eq   A B                                                           |"<< 	endl;
-	cout << "|____________________________________________________________________________________|"<<  endl;
+	cout << " _____________________________________________________________________________________________" << 	endl;
+	cout << "|--------------------------------------------------------------------------------------------|"<< 	endl;
+	cout << "|                                           HELP FILE                                        |"<< 	endl;
+	cout << "|--------------------------------------------------------------------------------------------|"<< 	endl;
+	cout << "|                                                                                            |"<< 	endl;
+	cout << "|  ./matrix_math -inp   A                           Open and saves to a new file (A.mtx)     |"<< 	endl;
+	cout << "|  ./matrix_math cmds... -out ZZ                    Saves matrix to a file (e.g., ZZ.mtx)    |"<< 	endl;
+	cout << "|                                                                                            |"<< 	endl;
+	cout << "|  ./matrix_math -h                                  Open help files screen                  |"<< 	endl;
+	cout << "|                                                                                            |"<< 	endl;
+	cout << "|  ./matrix_math -add  A B                           Adds matrix A to B        (A+B)         |"<< 	endl;
+	cout << "|  ./matrix_math -sub  A B                           Subtracts matrix A from B (A-B)         |"<< 	endl;
+	cout << "|  ./matrix_math -mul  A B                           Multiplys matrix A and B  (A*B)         |"<< 	endl;
+	cout << "|  ./matrix_math -smul A n                           Multiply matrix A by n    (A*n)         |"<< 	endl;
+	cout << "|  ./matrix_math -sdiv A n                           Divide matrix A by n      (A/n)         |"<< 	endl;
+	cout << "|  ./matrix_math -eq   A B                           Compare matrix A to B     (A==n)        |"<< 	endl;
+	cout << "|____________________________________________________________________________________________|"<<  endl;
 }
 /*--------------------------------------------------------------------------------------------------
 FUNCTION:           ReadFile()

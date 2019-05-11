@@ -13,6 +13,7 @@
 # Luiz Diego Garcia    2019-04-13      1.3                 added %.o
 # Luiz Diego Garcia    2019-04-18      1.4                 changed to matrix_test3 
 # Luiz Diego Garcia    2019-05-06      1.5                 changed to matrix_math 
+# Luiz Diego Garcia    2019-05-09      1.6                 Added matrix_math.o
 # ---------------------------------------------------------------------------------------
 #
 #           This is out original generic makefile command that will build

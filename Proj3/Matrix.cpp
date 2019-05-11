@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------------------------------
 FILE NAME:          Matrix.cpp
-DESCRIPTION:        Program functions
+DESCRIPTION:        Program functions (Implementation file)
 COMPILER:           GNU g++ compiler on Linux
 USAGE:              
 MODIFICATION HISTORY:
@@ -11,11 +11,24 @@ Luiz Diego Garcia           2019-05-01         1.1           Created constructor
 Luiz Diego Garcia           2019-05-01         1.2           Added getter
 Luiz Diego Garcia           2019-05-01         1.3           Added setter
 Luiz Diego Garcia           2019-05-02         1.4           Created display()
-Luiz Diego Garcia           2019-05-03         1.5           Addde destructor
+Luiz Diego Garcia           2019-05-03         1.5           Added destructor
 Luiz Diego Garcia           2019-05-03         1.6           Created ofstream overloaded ope.
 Luiz Diego Garcia           2019-05-05         1.7           Created ifstream overloaded ope.
 Luiz Diego Garcia           2019-05-05         1.8           Created defaut constructor
 Luiz Diego Garcia           2019-05-06         1.9           Changed library include
+Luiz Diego Garcia           2019-05-07         1.10          Removed .display - old code
+Luiz Diego Garcia           2019-05-07         1.11          Fixed indentations
+Luiz Diego Garcia           2019-05-08         1.12          >> operator changed outlook
+Luiz Diego Garcia           2019-05-08         1.13          Fixed ostream couts
+Luiz Diego Garcia           2019-05-08         1.14          Created = overloaded templated class
+Luiz Diego Garcia           2019-05-08         1.15          Fixed default constructor
+Luiz Diego Garcia           2019-05-08         1.16          Created a copy constructor
+Luiz Diego Garcia           2019-05-08         1.17          Created + operator
+Luiz Diego Garcia           2019-05-09         1.18          Created - operator
+Luiz Diego Garcia           2019-05-09         1.19          Fix bug in + print diff matrices sizes
+Luiz Diego Garcia           2019-05-09         1.20          Created * operator
+Luiz Diego Garcia           2019-05-09         1.21          Created / operator
+Luiz Diego Garcia           2019-05-09         1.22          Created == operator
 --------------------------------------------------------------------------------------------------*/
 
 //////////////////////////////////////
@@ -24,9 +37,9 @@ Luiz Diego Garcia           2019-05-06         1.9           Changed library inc
 #include "Matrix.h"
 
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        CONSTRUCTOR
-RETURNS:            
+FUNCTION:           Matrix<T>::Matrix(int,int)
+DESCRIPTION:        Constructor
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix<T>::Matrix(int n_rows, int n_cols)
@@ -46,9 +59,9 @@ Matrix<T>::Matrix(int n_rows, int n_cols)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           T Matrix<T>::get(int,int)
 DESCRIPTION:        Getter
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 T Matrix<T>::get(int i, int j) const
@@ -56,9 +69,9 @@ T Matrix<T>::get(int i, int j) const
 	return array[i][j];
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           void Matrix<T>::set(int,int,T)
 DESCRIPTION:        Setter
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 void Matrix<T>::set(int i, int j, T k)
@@ -66,28 +79,9 @@ void Matrix<T>::set(int i, int j, T k)
 	array[i][j] = k;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        DISPLAY
-RETURNS:            
---------------------------------------------------------------------------------------------------*/
-template<class T>
-void Matrix<T>::display()
-{
-	cout << endl;
-	for(int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < cols; j++)
-		{
-			cout << setw(4) << get(i, j);
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
-/*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix<T>::~Matrix()
 DESCRIPTION:        Destructor
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix<T>::~Matrix()
@@ -101,9 +95,9 @@ Matrix<T>::~Matrix()
 }
 
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:   	OSTREAM     
-RETURNS:            
+FUNCTION:           ostream &operator << (ostream &,const Matrix<T> &)
+DESCRIPTION:   	    Ostream    
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 ostream &operator << (ostream &strm, const Matrix<T> &array)
@@ -114,16 +108,16 @@ ostream &operator << (ostream &strm, const Matrix<T> &array)
 	{
 		for(int j = 0; j < array.cols; j++)
 		{
-			strm << setw(5) << setprecision(3) << array.array[i][j];
+			strm << setw(7) << setprecision(3) << array.array[i][j];
 		}
 		strm << endl;
 	}
 	return strm;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        ISTREAM
-RETURNS:            
+FUNCTION:           istream &operator >> (istream &,Matrix<T> &)
+DESCRIPTION:        Istream
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 istream &operator >> (istream &strm, Matrix<T> &array)
@@ -145,9 +139,9 @@ istream &operator >> (istream &strm, Matrix<T> &array)
 	return strm;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        Defaut constructor
-RETURNS:            
+FUNCTION:           Matrix<T>::Matrix()
+DESCRIPTION:        Defaut constructor - sets to 0/NULL
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix<T>::Matrix()
@@ -157,15 +151,15 @@ Matrix<T>::Matrix()
 	array = NULL;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix<T>::Matrix(const Matrix<T> &)
 DESCRIPTION:        Copy constructor
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
-Matrix<T>::Matrix(const Matrix<T> &old)
+Matrix<T>::Matrix(const Matrix<T> &temp)
 {
-	rows = old.rows;
-	cols = old.cols;
+	rows = temp.rows;
+	cols = temp.cols;
 
 	array = new T*[rows];
 
@@ -174,17 +168,17 @@ Matrix<T>::Matrix(const Matrix<T> &old)
 		array[i] = new T[cols];
 		for(int j = 0; j < cols; j++)
 		{
-			array[i][j] = old.array[i][j];
+			array[i][j] = temp.array[i][j];
 		}
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix<T> & Matrix<T>::operator = (const Matrix<T> &)
 DESCRIPTION:        = operator
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
-Matrix<T> & Matrix<T>::operator = (const Matrix<T> &old)
+Matrix<T> & Matrix<T>::operator = (const Matrix<T> &temp)
 {
 	for(int i = 0; i < rows; i++)
 	{
@@ -192,8 +186,8 @@ Matrix<T> & Matrix<T>::operator = (const Matrix<T> &old)
 	}
 	delete [] array;
 
-	rows = old.rows;
-	cols = old.cols;
+	rows = temp.rows;
+	cols = temp.cols;
 
 	array = new T*[rows];
 
@@ -202,22 +196,22 @@ Matrix<T> & Matrix<T>::operator = (const Matrix<T> &old)
 		array[i] = new T[cols];
 			for(int j = 0; j < cols; j++)
 			{
-				array[i][j] = old.array[i][j];
+				array[i][j] = temp.array[i][j];
 			}
 	}
 	return *this;
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix_ops<T>& Matrix_ops<T>::operator + (const Matrix_ops<T> &)
 DESCRIPTION:        + Overloaded Operator
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix_ops<T>& Matrix_ops<T>::operator + (const Matrix_ops<T> &temp)
 {
 	if(rows != temp.rows || cols != temp.cols)
 	{
-		throw " Wrong size matrices";
+		throw " Invalid Dimentions";
 	}
 	else
 	{
@@ -231,16 +225,16 @@ Matrix_ops<T>& Matrix_ops<T>::operator + (const Matrix_ops<T> &temp)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix_ops<T>& Matrix_ops<T>::operator - (const Matrix_ops<T> &)
 DESCRIPTION:        - Overloaded Operator
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix_ops<T>& Matrix_ops<T>::operator - (const Matrix_ops<T> &temp)
 {
 	if(rows != temp.rows || cols != temp.cols)
 	{
-		throw " Wrong size matrices";
+		throw " Invalid Dimentions";
 	}
 	else
 	{
@@ -254,16 +248,16 @@ Matrix_ops<T>& Matrix_ops<T>::operator - (const Matrix_ops<T> &temp)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
+FUNCTION:           Matrix_ops<T>& Matrix_ops<T>::operator * (const Matrix_ops<T> &)
 DESCRIPTION:        * Overloaded Operator
-RETURNS:            
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix_ops<T>& Matrix_ops<T>::operator * (const Matrix_ops<T> &test)
 {
 	if(cols != test.rows)
 	{
-		throw " Wrong size matrices";
+		throw " Invalid Dimentions";
 	}
 	else
 	{
@@ -282,9 +276,9 @@ Matrix_ops<T>& Matrix_ops<T>::operator * (const Matrix_ops<T> &test)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        * scalar
-RETURNS:            
+FUNCTION:           Matrix_ops<T>& Matrix_ops<T>::operator * (double&)
+DESCRIPTION:        Multiplicantion Scalar
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix_ops<T>& Matrix_ops<T>::operator * (double& temp)
@@ -298,9 +292,9 @@ Matrix_ops<T>& Matrix_ops<T>::operator * (double& temp)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        / scalar
-RETURNS:            
+FUNCTION:           Matrix_ops<T>& Matrix_ops<T>::operator / (double& )
+DESCRIPTION:        Division Scalar
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 Matrix_ops<T>& Matrix_ops<T>::operator / (double& temp)
@@ -314,9 +308,9 @@ Matrix_ops<T>& Matrix_ops<T>::operator / (double& temp)
 	}
 }
 /*--------------------------------------------------------------------------------------------------
-FUNCTION:           
-DESCRIPTION:        == operator
-RETURNS:            
+FUNCTION:           bool Matrix_ops<T>::operator == (const Matrix_ops<T> &)
+DESCRIPTION:        Equality Operator
+RETURNS:            N/A
 --------------------------------------------------------------------------------------------------*/
 template<class T>
 bool Matrix_ops<T>::operator == (const Matrix_ops<T> &temp)
@@ -337,7 +331,6 @@ bool Matrix_ops<T>::operator == (const Matrix_ops<T> &temp)
 				if(array[i][j] != temp.array[i][j])
 				{
 					isFlip = false;
-					
 				}
 				return isFlip;
 			}
